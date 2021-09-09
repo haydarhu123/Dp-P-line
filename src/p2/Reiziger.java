@@ -1,5 +1,9 @@
 package p2;
 
+import p3.Adres;
+
+import java.sql.Date;
+
 public class Reiziger {
 
     private int id;
@@ -7,6 +11,15 @@ public class Reiziger {
     private String tussenvoegsel;
     private String achternaam;
     private java.sql.Date geboortedatum;
+    private Adres adres;
+
+    public Adres getAdres() {
+        return adres;
+    }
+
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+    }
 
 
     public Reiziger(int id, String voorletters, String tussenvoegsel, String achternaam, java.sql.Date geboortedatum) {

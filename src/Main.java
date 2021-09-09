@@ -1,6 +1,9 @@
 import p2.Reiziger;
 import p2.ReizigerDAO;
 import p2.ReizigerDAOPsql;
+import p3.Adres;
+import p3.AdresDAO;
+import p3.AdresDAOPsql;
 
 
 import java.sql.*;
@@ -17,8 +20,9 @@ public class Main {
         getConnection();
 
         ReizigerDAOPsql rdao = new ReizigerDAOPsql(connection);
-
-
+        AdresDAOPsql adrdao = new AdresDAOPsql(connection);
+        rdao.setAdrdao(adrdao);
+        adrdao.setRdao(rdao);
         testReizigerDAO(rdao);
         //testAdresDAO(adrdao);
     }
@@ -34,10 +38,9 @@ public class Main {
             System.err.println(sqlException.getMessage());
         }
     }
-
     /**
      * P2. Reiziger DAO: persistentie van een klasse
-     * <p>
+     *
      * Deze methode test de CRUD-functionaliteit van de Reiziger DAO
      *
      * @throws SQLException
@@ -79,5 +82,33 @@ public class Main {
 
         rdao.findAll();
     }
+//
+//    private static void testAdresDAO(AdresDAO adrdao) throws SQLException {
+//        System.out.println("\n---------- Test ReizigerDAO -------------");
+//
+//        // Haal alle adressen op uit de database
+//        List<Adres> adres = adrdao.findAll();
+//        System.out.println("[Test] AdresDAO.findAll() geeft de volgende adressen:");
+//        for (Adres adr : adres) {
+//            System.out.println(adr);
+//        }
+//        System.out.println();
+//
+//        // Maak een nieuwe reiziger aan en persisteer deze in de database
+//        String gbdatum = "1981-03-14";
+//        Reiziger sietske = new Reiziger(6, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
+//
+//
+//
+//
+//        // Maak een nieuwe adres aan en persisteer deze in de database
+//        Adres Haydar = new Adres(6, "3564TA","40", "sint maartendreef", "Utrecht", 12);
+//
+//        adrdao.save(Haydar);
+//        System.out.println(Haydar);
+//        adrdao.delete(Haydar);
+//        Haydar.setWoonplaats("almere");
+//        adrdao.update(Haydar);
 
 }
+//}

@@ -1,5 +1,6 @@
 package p2;
 
+import p3.AdresDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,11 +9,15 @@ import java.util.List;
 public class ReizigerDAOPsql implements ReizigerDAO {
 
     private Connection conn;
-
+    private AdresDAO adrdao;
 
     public ReizigerDAOPsql(Connection connection) {
         this.conn = connection;
 
+    }
+
+    public void setAdrdao(AdresDAO adrdao) {
+        this.adrdao = adrdao;
     }
 
 
