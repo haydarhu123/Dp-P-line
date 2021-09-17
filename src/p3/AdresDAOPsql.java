@@ -32,7 +32,7 @@ public class AdresDAOPsql implements AdresDAO {
             prepstmt.setString(3, adres.getHuisnummer());
             prepstmt.setString(4, adres.getStraat());
             prepstmt.setString(5, adres.getWoonplaats());
-            prepstmt.setInt(6, adres.getReiziger_id());
+            prepstmt.setInt(6, adres.getReiziger_id().getId());
 
             prepstmt.executeUpdate();
 
@@ -74,7 +74,7 @@ public class AdresDAOPsql implements AdresDAO {
             prepstmt.setString(4, adres.getStraat());
             prepstmt.setString(5, adres.getWoonplaats());
             prepstmt.setInt(5, adres.getId());
-            prepstmt.setInt(6, adres.getReiziger_id());
+            prepstmt.setInt(6, adres.getReiziger_id().getId());
 
             prepstmt.executeUpdate();
 
@@ -110,7 +110,7 @@ public class AdresDAOPsql implements AdresDAO {
                 System.out.println(woonplaats);
                 System.out.println(reiziger_id);
 
-                return new Adres(adres_id, postcode, huisnummer, straat, woonplaats, reiziger_id);
+                return new Adres(adres_id, postcode, huisnummer, straat, woonplaats, reiziger);
             }
             rsltst.close();
             prepstmt.close();
@@ -139,7 +139,7 @@ public class AdresDAOPsql implements AdresDAO {
             String woonplaats = rsltst.getString("woonplaats");
             int reiziger_id = rsltst.getInt("reiziger_id");
 
-            Adres adres = new Adres(adres_id, postcode, huisnummer, straat, woonplaats, reiziger_id);
+            Adres adres = new Adres(adres_id, postcode, huisnummer, straat, woonplaats, rdao.findById(reiziger_id));
             aantaladressen.add(adres);
         }
         return aantaladressen;

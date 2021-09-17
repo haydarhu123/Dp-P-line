@@ -24,6 +24,7 @@ public class Main {
         rdao.setAdrdao(adrdao);
         adrdao.setRdao(rdao);
         testReizigerDAO(rdao);
+        testAdresDAO(adrdao, rdao);
         //testAdresDAO(adrdao);
     }
 
@@ -82,33 +83,35 @@ public class Main {
 
         rdao.findAll();
     }
-//
-//    private static void testAdresDAO(AdresDAO adrdao) throws SQLException {
-//        System.out.println("\n---------- Test ReizigerDAO -------------");
-//
-//        // Haal alle adressen op uit de database
-//        List<Adres> adres = adrdao.findAll();
-//        System.out.println("[Test] AdresDAO.findAll() geeft de volgende adressen:");
-//        for (Adres adr : adres) {
-//            System.out.println(adr);
-//        }
-//        System.out.println();
-//
-//        // Maak een nieuwe reiziger aan en persisteer deze in de database
-//        String gbdatum = "1981-03-14";
-//        Reiziger sietske = new Reiziger(6, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
-//
-//
-//
-//
-//        // Maak een nieuwe adres aan en persisteer deze in de database
-//        Adres Haydar = new Adres(6, "3564TA","40", "sint maartendreef", "Utrecht", 12);
-//
-//        adrdao.save(Haydar);
-//        System.out.println(Haydar);
-//        adrdao.delete(Haydar);
-//        Haydar.setWoonplaats("almere");
-//        adrdao.update(Haydar);
 
+    private static void testAdresDAO(AdresDAO adrdao, ReizigerDAO rdao) throws SQLException {
+        System.out.println("\n---------- Test ReizigerDAO -------------");
+
+        // Haal alle adressen op uit de database
+        List<Adres> adres = adrdao.findAll();
+        System.out.println("[Test] AdresDAO.findAll() geeft de volgende adressen:");
+        for (Adres adr : adres) {
+            System.out.println(adr);
+        }
+        System.out.println();
+
+        // Maak een nieuwe reiziger aan en persisteer deze in de database
+        String gbdatum = "1981-03-14";
+        Reiziger sietske = new Reiziger(6, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
+
+        rdao.findById(6);
+
+
+        // Maak een nieuwe adres aan en persisteer deze in de database
+        Adres adres1 = new Adres(6, "3564TA", "40", "sint maartendreef", "Utrecht", sietske);
+        System.out.println(adres.size());
+        adres1.setAdres()
+        adrdao.save(Haydar);
+        System.out.println(Haydar);
+//        adrdao.delete(Haydar);
+        adres1.setWoonplaats("almere");
+        adres1.;
+        adrdao.update(Haydar);
+
+    }
 }
-//}

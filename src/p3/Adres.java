@@ -12,9 +12,9 @@ public class Adres {
     private String huisnummer;
     private String straat;
     private String woonplaats;
-    private int reiziger_id;
+    private Reiziger reiziger_id;
 
-    public Adres(int id, String postcode, String huisnummer, String straat, String woonplaats, int reiziger_id) {
+    public Adres(int id, String postcode, String huisnummer, String straat, String woonplaats, Reiziger reiziger_id) {
         this.id = id;
         this.postcode = postcode;
         this.huisnummer = huisnummer;
@@ -31,11 +31,11 @@ public class Adres {
         this.id = id;
     }
 
-    public int getReiziger_id() {
+    public Reiziger getReiziger_id() {
         return reiziger_id;
     }
 
-    public void setReiziger_id(int reiziger_id) {
+    public void setReiziger_id(Reiziger reiziger_id) {
         this.reiziger_id = reiziger_id;
     }
 
