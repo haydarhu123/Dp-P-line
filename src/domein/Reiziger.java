@@ -1,6 +1,4 @@
-package p2;
-
-import p3.Adres;
+package domein;
 
 public class Reiziger {
 

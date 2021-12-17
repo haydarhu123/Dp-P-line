@@ -1,7 +1,7 @@
-package p4;
+package dao;
 
-import p2.Reiziger;
-import p3.Adres;
+import domein.OVChipkaart;
+import domein.Reiziger;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,8 +1,7 @@
-package p4;
+package domein;
 
-import p2.Reiziger;
-import p2.ReizigerDAO;
-import p3.Adres;
+import dao.ReizigerDAO;
+import dao.OVChipkaartDAO;
 
 import java.sql.*;
 import java.util.ArrayList;

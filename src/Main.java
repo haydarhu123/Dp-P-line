@@ -1,9 +1,9 @@
-import p2.Reiziger;
-import p2.ReizigerDAO;
-import p2.ReizigerDAOPsql;
-import p3.Adres;
-import p3.AdresDAO;
-import p3.AdresDAOPsql;
+import domein.Reiziger;
+import dao.ReizigerDAO;
+import domein.ReizigerDAOPsql;
+import domein.Adres;
+import dao.AdresDAO;
+import domein.AdresDAOPsql;
 
 
 import java.sql.*;
@@ -100,18 +100,21 @@ public class Main {
         Reiziger sietske = new Reiziger(6, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
 
         rdao.findById(6);
+        rdao.save(sietske);
 
 
         // Maak een nieuwe adres aan en persisteer deze in de database
         Adres adres1 = new Adres(6, "3564TA", "40", "sint maartendreef", "Utrecht", sietske);
         System.out.println(adres.size());
-        adres1.setAdres()
-        adrdao.save(Haydar);
-        System.out.println(Haydar);
-//        adrdao.delete(Haydar);
+        System.out.println(sietske);
         adres1.setWoonplaats("almere");
-        adres1.;
-        adrdao.update(Haydar);
+        adres1.setAdres("kanariestraat");
+        adres1.setHuisnummer("122");
+        adres1.setPostcode("3597XX");
+        adrdao.save(adres1);
+        adrdao.findAll();
+        adrdao.findByReiziger(sietske);
+
 
     }
 }

@@ -1,9 +1,4 @@
-package p3;
-
-import p2.Reiziger;
-import p2.ReizigerDAO;
-
-import java.sql.Connection;
+package domein;
 
 public class Adres {
 
@@ -12,15 +7,15 @@ public class Adres {
     private String huisnummer;
     private String straat;
     private String woonplaats;
-    private Reiziger reiziger_id;
+    private Reiziger reiziger_Id;
 
-    public Adres(int id, String postcode, String huisnummer, String straat, String woonplaats, Reiziger reiziger_id) {
+    public Adres(int id, String postcode, String huisnummer, String straat, String woonplaats, Reiziger reiziger_Id) {
         this.id = id;
         this.postcode = postcode;
         this.huisnummer = huisnummer;
         this.straat = straat;
         this.woonplaats = woonplaats;
-        this.reiziger_id = reiziger_id;
+        this.reiziger_Id = reiziger_Id;
     }
 
     public int getId() {
@@ -31,12 +26,12 @@ public class Adres {
         this.id = id;
     }
 
-    public Reiziger getReiziger_id() {
-        return reiziger_id;
+    public Reiziger getReiziger_Id() {
+        return reiziger_Id;
     }
 
-    public void setReiziger_id(Reiziger reiziger_id) {
-        this.reiziger_id = reiziger_id;
+    public void setReiziger_Id(Reiziger reiziger_Id) {
+        this.reiziger_Id = reiziger_Id;
     }
 
     public String getHuisnummer() {
@@ -80,6 +75,9 @@ public class Adres {
                 ", straat='" + straat + '\'' +
                 ", woonplaats='" + woonplaats + '\'' +
                 '}';
+    }
+
+    public void setAdres(String kanariestraat) {
     }
 }
 

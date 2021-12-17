@@ -1,6 +1,7 @@
-package p3;
+package dao;
 
-import p2.Reiziger;
+import domein.Adres;
+import domein.Reiziger;
 
 import java.sql.SQLException;
 import java.util.List;

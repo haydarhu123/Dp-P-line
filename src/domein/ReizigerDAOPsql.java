@@ -1,6 +1,7 @@
-package p2;
+package domein;
 
-import p3.AdresDAO;
+import dao.ReizigerDAO;
+import dao.AdresDAO;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package p3;
+package domein;
 
-import p2.Reiziger;
-import p2.ReizigerDAO;
+import dao.ReizigerDAO;
+import dao.AdresDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class AdresDAOPsql implements AdresDAO {
             prepstmt.setString(3, adres.getHuisnummer());
             prepstmt.setString(4, adres.getStraat());
             prepstmt.setString(5, adres.getWoonplaats());
-            prepstmt.setInt(6, adres.getReiziger_id().getId());
+            prepstmt.setInt(6, adres.getReiziger_Id().getId());
 
             prepstmt.executeUpdate();
 
@@ -62,7 +62,7 @@ public class AdresDAOPsql implements AdresDAO {
     }
 
     @Override
-    public boolean update(Adres adres) {
+    public boolean update(Adres adres) throws SQLException {
         try {
             String query = "UPDATE adres SET voorletters = ?, tussenvoegsel =?, achternaam=?, geboortedatum=?, reiziger_id = ? WHERE adres_id=?";
 
@@ -74,12 +74,13 @@ public class AdresDAOPsql implements AdresDAO {
             prepstmt.setString(4, adres.getStraat());
             prepstmt.setString(5, adres.getWoonplaats());
             prepstmt.setInt(5, adres.getId());
-            prepstmt.setInt(6, adres.getReiziger_id().getId());
+            prepstmt.setInt(6, adres.getReiziger_Id().getId());
 
             prepstmt.executeUpdate();
 
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+        } catch (SQLException exception) {
+            System.out.println("De gegevens konden niet ge-update worden.");
+            ;
 
         }
         return true;

@@ -1,4 +1,4 @@
-package p1;
+package domein;
 
 import java.sql.*;
 import java.sql.SQLException;

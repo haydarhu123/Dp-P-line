@@ -1,4 +1,6 @@
-package p2;
+package dao;
+
+import domein.Reiziger;
 
 import java.sql.SQLException;
 import java.util.List;

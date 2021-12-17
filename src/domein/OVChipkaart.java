@@ -1,6 +1,6 @@
-package p4;
+package domein;
 
-import p2.Reiziger;
+import domein.Reiziger;
 
 import java.sql.Date;
 
