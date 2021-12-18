@@ -1,5 +1,6 @@
 package domein;
 
+import dao.OVChipkaartDAO;
 import dao.ReizigerDAO;
 import dao.AdresDAO;
 
@@ -11,6 +12,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
 
     private Connection conn;
     private AdresDAO adrdao;
+    private OVChipkaartDAO ovrdao;
 
     public ReizigerDAOPsql(Connection connection) {
         this.conn = connection;
@@ -25,23 +27,17 @@ public class ReizigerDAOPsql implements ReizigerDAO {
     @Override
     public boolean save(Reiziger reiziger) {
         try {
-            String query = "INSERT INTO reiziger (reiziger_id , voorletters , tussenvoegsel , achternaam, geboortedatum) VALUES (?,?,?,?,?)";
-
-            PreparedStatement prepstmt = conn.prepareStatement(query);
-
-            int id = reiziger.getId();
-            String voorletters = reiziger.getVoorletters();
-            String tussenvoegsel = reiziger.getTussenvoegsel();
-            String achternaam = reiziger.getAchternaam();
-            java.sql.Date geboortedatum = reiziger.getGeboortedatum();
-
+            PreparedStatement prepstmt = conn.prepareStatement("INSERT INTO reiziger (reiziger_id , voorletters , tussenvoegsel , achternaam, geboortedatum, adres_id, kaart_nummer) VALUES (?,?,?,?,?,?,?)");
             prepstmt.setInt(1, reiziger.getId());
             prepstmt.setString(2, reiziger.getVoorletters());
             prepstmt.setString(3, reiziger.getTussenvoegsel());
             prepstmt.setString(4, reiziger.getAchternaam());
             prepstmt.setDate(5, reiziger.getGeboortedatum());
+            prepstmt.setInt(6, reiziger.getAdres().getId());
+            prepstmt.setArray(7, (Array) reiziger.getOvChipkaart());
 
             prepstmt.executeUpdate();
+            prepstmt.close();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -60,6 +56,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.setInt(1, reiziger.getId());
 
             prepstmt.executeUpdate();
+            prepstmt.close();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -75,13 +72,6 @@ public class ReizigerDAOPsql implements ReizigerDAO {
 
             PreparedStatement prepstmt = conn.prepareStatement(query);
 
-//            int id = reiziger.getId();
-//            String voorletters = reiziger.getVoorletters();
-//            String tussenvoegsel = reiziger.getTussenvoegsel();
-//            String achternaam = reiziger.getAchternaam();
-//            java.sql.Date geboortedatum = reiziger.getGeboortedatum();
-
-
             prepstmt.setString(1, reiziger.getVoorletters());
             prepstmt.setString(2, reiziger.getTussenvoegsel());
             prepstmt.setString(3, reiziger.getAchternaam());
@@ -89,6 +79,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.setInt(5, reiziger.getId());
 
             prepstmt.executeUpdate();
+            prepstmt.close();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -112,14 +103,17 @@ public class ReizigerDAOPsql implements ReizigerDAO {
                 String tussenvoegsel = rsltst.getString("tussenvoegsel");
                 String achternaam = rsltst.getString("achternaam");
                 Date geboortedatum = Date.valueOf(String.valueOf(rsltst.getDate("geboortedatum")));
+                Adres adres_id = (Adres) rsltst.getRowId("adres_id");
+                int kaartnummer = rsltst.getInt("kaart_nummer");
 
                 System.out.println(reiziger_id);
                 System.out.println(voorletters);
                 System.out.println(tussenvoegsel);
                 System.out.println(achternaam);
                 System.out.println(geboortedatum);
+                System.out.println(adres_id);
 
-                return new Reiziger(reiziger_id, voorletters, tussenvoegsel, achternaam, geboortedatum);
+                return new Reiziger(reiziger_id, voorletters, tussenvoegsel, achternaam, geboortedatum, adres_id, (List<OVChipkaart>) ovrdao.findByKaartnummer(kaartnummer));
             }
             rsltst.close();
             prepstmt.close();
@@ -151,6 +145,8 @@ public class ReizigerDAOPsql implements ReizigerDAO {
                 System.out.println(achternaam);
                 System.out.println(geboortedatum);
             }
+            rsltst.close();
+            prepstmt.close();
             return aantalreizigers;
         } catch (SQLException sqlException) {
             System.err.println("De gegevens van deze geboortedatum kunnen niet opgehaald worden, probeer het later opnieuw!");
@@ -173,10 +169,15 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             String tussenvoegsel = rsltst.getString("tussenvoegsel");
             String achternaam = rsltst.getString("achternaam");
             Date geboortedatum = rsltst.getDate("geboortedatum");
+            Adres adres_id = (Adres) rsltst.getRowId("adres_id");
+            int kaartnummer = rsltst.getInt("kaart_nummer");
 
-            Reiziger reiziger = new Reiziger(reiziger_id, voorletters, tussenvoegsel, achternaam, geboortedatum);
+            Reiziger reiziger = new Reiziger(reiziger_id, voorletters, tussenvoegsel, achternaam, geboortedatum, adres_id, (List<OVChipkaart>) ovrdao.findByKaartnummer(kaartnummer));
             aantalreizigers.add(reiziger);
+            rsltst.close();
+            stmt.close();
         }
+
         return aantalreizigers;
     }
 }

@@ -59,4 +59,15 @@ public class OVChipkaart {
     public Reiziger getReiziger_id() {
         return reiziger_id;
     }
+
+    @Override
+    public String toString() {
+        return "OVChipkaart{" +
+                "kaartnummer=" + kaartnummer +
+                ", geldig_tot=" + geldig_tot +
+                ", klasse=" + klasse +
+                ", saldo=" + saldo +
+                ", reiziger_id=" + reiziger_id +
+                '}';
+    }
 }

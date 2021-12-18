@@ -77,8 +77,6 @@ public class Adres {
                 '}';
     }
 
-    public void setAdres(String kanariestraat) {
-    }
 }
 
 

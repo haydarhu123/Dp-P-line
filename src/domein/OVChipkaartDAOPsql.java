@@ -1,5 +1,6 @@
 package domein;
 
+import dao.AdresDAO;
 import dao.ReizigerDAO;
 import dao.OVChipkaartDAO;
 
@@ -11,10 +12,16 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
 
     private Connection conn;
     private ReizigerDAO rdao;
+    private OVChipkaartDAO ovrdao;
 
 
     public OVChipkaartDAOPsql(Connection connection) {
         this.conn = connection;
+    }
+
+
+    public void setOvRdao(OVChipkaartDAO ovrdao) {
+        this.ovrdao = ovrdao;
     }
 
     @Override
@@ -24,12 +31,6 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
 
             PreparedStatement prepstmt = conn.prepareStatement(query);
 
-            int kaartnummer = ovchipkaart.getKaartnummer();
-            Date geldig_tot = ovchipkaart.getGeldig_tot();
-            int klasse = ovchipkaart.getKlasse();
-            Double saldo = ovchipkaart.getSaldo();
-            int Reiziger = ovchipkaart.getReiziger_id().getId();
-
             prepstmt.setInt(1, ovchipkaart.getKaartnummer());
             prepstmt.setDate(2, ovchipkaart.getGeldig_tot());
             prepstmt.setInt(3, ovchipkaart.getKlasse());
@@ -37,6 +38,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             prepstmt.setInt(5, ovchipkaart.getReiziger_id().getId());
 
             prepstmt.executeUpdate();
+            prepstmt.close();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -55,6 +57,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             prpstmt.setInt(1, ovchipkaart.getKaartnummer());
 
             prpstmt.executeUpdate();
+            prpstmt.close();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -70,7 +73,6 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
 
             PreparedStatement prepstmt = conn.prepareStatement(query);
 
-
             prepstmt.setDate(1, ovchipkaart.getGeldig_tot());
             prepstmt.setInt(2, ovchipkaart.getKlasse());
             prepstmt.setDouble(3, ovchipkaart.getSaldo());
@@ -79,6 +81,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
 
 
             prepstmt.executeUpdate();
+            prepstmt.close();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -89,11 +92,13 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
 
 
     @Override
-    public OVChipkaart findByReiziger(Reiziger reiziger) throws SQLException {
+    public List<OVChipkaart> findByReiziger(Reiziger reiziger) throws SQLException {
 
         try {
             PreparedStatement prepstmt = conn.prepareStatement("SELECT * FROM ovchipkaart WHERE kaartnummer=?");
             prepstmt.setInt(1, reiziger.getId());
+
+            ArrayList<OVChipkaart> ovChipkaart = new ArrayList<OVChipkaart>();
 
             ResultSet rsltst = prepstmt.executeQuery();
             while (rsltst.next()) {
@@ -103,14 +108,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
                 Double saldo = rsltst.getDouble("saldo");
                 int Reiziger = rsltst.getInt("reiziger_id");
 
-
-                System.out.println(kaartnummer);
-                System.out.println(geldig_tot);
-                System.out.println(klasse);
-                System.out.println(saldo);
-                System.out.println(reiziger);
-
-                return new OVChipkaart(kaartnummer, geldig_tot, klasse, saldo, reiziger);
+                return (List<OVChipkaart>) new OVChipkaart(kaartnummer, geldig_tot, klasse, saldo, rdao.findById(Reiziger));
             }
             rsltst.close();
             prepstmt.close();
@@ -172,9 +170,13 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
 
             OVChipkaart ovchipkaart = new OVChipkaart(kaartnummer, geldig_tot, klasse, saldo, rdao.findById(Reiziger));
             aantalovchipkaarten.add(ovchipkaart);
+            rsltst.close();
+            stmt.close();
         }
+
         return aantalovchipkaarten;
     }
+
 
 }
 

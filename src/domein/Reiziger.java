@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.*;
+
 public class Reiziger {
 
     private int id;
@@ -7,16 +9,17 @@ public class Reiziger {
     private String tussenvoegsel;
     private String achternaam;
     private java.sql.Date geboortedatum;
+    private Adres adres_id;
+    private List<OVChipkaart> ovChipkaart = new ArrayList<>();
 
-    private Adres adres;
-
-
-    public Reiziger(int id, String voorletters, String tussenvoegsel, String achternaam, java.sql.Date geboortedatum) {
+    public Reiziger(int id, String voorletters, String tussenvoegsel, String achternaam, java.sql.Date geboortedatum, Adres adres_id, List<OVChipkaart> ovChipkaart) {
         this.id = id;
         this.voorletters = voorletters;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
+        this.adres_id = adres_id;
+        this.ovChipkaart = ovChipkaart;
     }
 
 
@@ -61,27 +64,32 @@ public class Reiziger {
     }
 
     public Adres getAdres() {
-        return adres;
+        return adres_id;
     }
 
     public void setAdres(Adres adres) {
-        this.adres = adres;
+        this.adres_id = adres_id;
+    }
+
+    public List<OVChipkaart> getOvChipkaart() {
+        return ovChipkaart;
+    }
+
+    public void setOvChipkaart(List<OVChipkaart> ovChipkaart) {
+        this.ovChipkaart = ovChipkaart;
     }
 
     @Override
     public String toString() {
-        String uitwerking = "Reiziger{" +
+
+        return "Reiziger{" +
                 "id=" + id +
                 ", voorletters='" + voorletters + '\'' +
                 ", tussenvoegsel='" + tussenvoegsel + '\'' +
                 ", achternaam='" + achternaam + '\'' +
-                ", geboortedatum=" + '\'' + ", geboortedatum = '" + geboortedatum + '}';
-
-        if (adres == null) {
-            uitwerking = "Adres is niet gevonden.";
-        } else {
-            uitwerking = adres.toString();
-        }
-        return uitwerking;
+                ", geboortedatum=" + geboortedatum +
+                ", adres_id=" + adres_id +
+                ", ovChipkaart=" + ovChipkaart +
+                '}';
     }
 }
