@@ -1,6 +1,7 @@
 package domein;
 
 import dao.AdresDAO;
+import dao.ProductDAOP;
 import dao.ReizigerDAO;
 import dao.OVChipkaartDAO;
 
@@ -13,6 +14,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
     private Connection conn;
     private ReizigerDAO rdao;
     private OVChipkaartDAO ovrdao;
+    private ProductDAOP prdao;
 
 
     public OVChipkaartDAOPsql(Connection connection) {
@@ -41,7 +43,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             prepstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet opgeslagen worden.");
 
         }
         return false;
@@ -60,7 +62,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             prpstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet verwijderd worden.");
 
         }
         return false;
@@ -84,7 +86,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             prepstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet ge-update worden.");
 
         }
         return false;
@@ -116,7 +118,6 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
         } finally {
 
         }
-
         return null;
     }
 
@@ -146,7 +147,7 @@ public class OVChipkaartDAOPsql implements OVChipkaartDAO {
             prepstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.err.println("De gegevens van deze kaartnummer kunnen niet opgehaald worden, probeer het later opnieuw!");
         }
         return null;
     }

@@ -39,7 +39,8 @@ public class AdresDAOPsql implements AdresDAO {
 
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet opgeslagen worden.");
+
 
         }
         return false;
@@ -59,7 +60,7 @@ public class AdresDAOPsql implements AdresDAO {
 
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet verwijderd worden.");
 
         }
         return false;

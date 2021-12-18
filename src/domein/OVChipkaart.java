@@ -3,6 +3,7 @@ package domein;
 import domein.Reiziger;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class OVChipkaart {
     private int kaartnummer;
@@ -10,6 +11,7 @@ public class OVChipkaart {
     private int klasse;
     private Double saldo;
     private Reiziger reiziger_id;
+    private ArrayList<Product> product;
 
 
     public OVChipkaart(int kaartnummer, Date geldig_tot, int klasse, Double saldo, Reiziger reiziger_id) {
@@ -60,6 +62,14 @@ public class OVChipkaart {
         return reiziger_id;
     }
 
+    public ArrayList<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(ArrayList<Product> product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "OVChipkaart{" +
@@ -68,6 +78,7 @@ public class OVChipkaart {
                 ", klasse=" + klasse +
                 ", saldo=" + saldo +
                 ", reiziger_id=" + reiziger_id +
+                ", product=" + product +
                 '}';
     }
 }

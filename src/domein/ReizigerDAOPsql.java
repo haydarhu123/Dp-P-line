@@ -40,7 +40,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet opgeslagen worden.");
 
         }
         return false;
@@ -59,7 +59,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet verwijderd worden.");
 
         }
         return false;
@@ -82,7 +82,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.close();
 
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            System.out.println("De gegevens konden niet ge-update worden.");
 
         }
         return false;
