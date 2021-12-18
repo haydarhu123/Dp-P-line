@@ -32,7 +32,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.setString(2, reiziger.getVoorletters());
             prepstmt.setString(3, reiziger.getTussenvoegsel());
             prepstmt.setString(4, reiziger.getAchternaam());
-            prepstmt.setDate(5, reiziger.getGeboortedatum());
+            prepstmt.setDate(5, (Date) reiziger.getGeboortedatum());
             prepstmt.setInt(6, reiziger.getAdres().getId());
             prepstmt.setArray(7, (Array) reiziger.getOvChipkaart());
 
@@ -75,7 +75,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             prepstmt.setString(1, reiziger.getVoorletters());
             prepstmt.setString(2, reiziger.getTussenvoegsel());
             prepstmt.setString(3, reiziger.getAchternaam());
-            prepstmt.setDate(4, reiziger.getGeboortedatum());
+            prepstmt.setDate(4, (Date) reiziger.getGeboortedatum());
             prepstmt.setInt(5, reiziger.getId());
 
             prepstmt.executeUpdate();

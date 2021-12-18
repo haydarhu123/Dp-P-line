@@ -8,7 +8,7 @@ public class Reiziger {
     private String voorletters;
     private String tussenvoegsel;
     private String achternaam;
-    private java.sql.Date geboortedatum;
+    private java.util.Date geboortedatum;
     private Adres adres_id;
     private List<OVChipkaart> ovChipkaart = new ArrayList<>();
 
@@ -55,11 +55,11 @@ public class Reiziger {
         this.achternaam = achternaam;
     }
 
-    public java.sql.Date getGeboortedatum() {
+    public java.util.Date getGeboortedatum() {
         return geboortedatum;
     }
 
-    public void setGeboortedatum(java.sql.Date geboortedatum) {
+    public void setGeboortedatum(java.util.Date geboortedatum) {
         this.geboortedatum = geboortedatum;
     }
 
